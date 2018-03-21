@@ -80,5 +80,5 @@
 3.  返回字典： 函数可以返回任何类型的值，包括字典和列表等较复杂的数据结构
     ```py
     def build_person(first_name, last_name, age=''):
-        person = {'first': first_name, 'last': last_name, 'age': age)}
+        person = {'first': first_name, 'last': last_name)}
     ```
