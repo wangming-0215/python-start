@@ -165,7 +165,79 @@
     ```
 
 3.  每个函数都应值负责一项具体的工作
-4.  禁止函数修改列表： 向函数传递列表的副本而不是原件，这样函数所做的修改都只影响副本，而丝毫不影响原件.（_虽然向函数传递列表的副本可保留原始列表的内容，但除非有充分理由需要传递副本，否则还是应该将原始列表传递给函数，因为让函数使用现成的列表可避免花时间和内存创建副本，从而提高效率，在处理大型列表时尤其如此_）
+4.  禁止函数修改列表： 向函数传递列表的副本而不是原件，这样函数所做的修改都只影响副本，而丝毫不影响原件.（**虽然向函数传递列表的副本可保留原始列表的内容，但除非有充分理由需要传递副本，否则还是应该将原始列表传递给函数，因为让函数使用现成的列表可避免花时间和内存创建副本，从而提高效率，在处理大型列表时尤其如此**）
     ```py
     function_name(list_name[:])
     ```
+
+## 传递任意数量的参数
+
+1.  python 允许函数调用语句中收集任意数量的实参（`*toppings`星号让 python 创建一个名为`toppings`的空元组，并将接收到的所有值都封装到这个元组中）
+
+    ```py
+    def make_pizza(*toppings)
+        print(toppings)
+
+    make_pizza('mushrooms', 'green peppers', 'extra cheese') # ('mushrooms', 'green peppers', 'extra cheese')
+    ```
+
+2.  结合使用位置实参和任意数量实参：在函数定义中，必须将接纳任意数量实参的形参放在最后，python 先匹配位置实参和关键字实参，在将余下的实参都收集到最后一个参数中（javascript rest ???)
+
+    ```py
+    def make_pizza(size, *toppings):
+        print('\nMaking a ' + str(size) + '-inch pizza with the following toppings: ')
+        for topping in toppings:
+            print('- ' + topping)
+    ```
+
+3.  使用任意数量关键字实参：有时候需要接受任意数量的实参，但预先不知道传递给函数的会是什么样的信息，在这种情况下，可将函数编写成能够接受任意数量的键值对---调用语句提供多少就接受多少（形参`**user_info`中的两个型号让 python 创建一个名为`user_info`的空字典，并将接收到的所有名称-值（关键字传参）都封装到这个字典中）
+
+    ````py
+    def build_profile(first, last, **user_info):
+    profile = {}
+    profile['first_name'] = first
+    profile['last_name'] = lase
+    for key, value in user_info.items:
+    profile[key]=value
+
+            return profile
+
+        user_profile = build_profile('albert', 'einstein', location='princeton', field='physics')
+        ```
+    ````
+
+## 将函数存储在模块中
+
+通过将函数存储在独立的文件中，可隐藏程序代码的细节，将重点放在高层逻辑上，复用性强。
+
+1.  导入整个模块：
+
+    * 模块：要让函数是可导入的，要先创建模块。模块就是扩展名为`.py`的文件，包含要导入到程序中的代码
+
+      ```py
+      # pizza.py
+      def make_pizza(size, *toppings);
+          print('\nMaking a ' + size + '-inch pizza with the following toppins: ')
+          for topping in toppings:
+              print('- ' + topping)
+
+      # making_pizza.py
+      import pizza # 导入模块
+      pizza.make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+      ```
+
+    * 导入模块的方法：
+      * 导入整个模块：编写一条`import`语句并在其中指定模块名，就可在程序中使用该模块中的所有函数。`import module_name`
+      * 导入特定函数： `from module_name import function_0, function_1, function_2`
+      * 使用`as`给函数指定别名： 如果要导入的函数名称可能与程序中的现有的名称冲突，或者函数名太长，可指定简短且独一无二的别名（函数的另一个名字）。 `from module_name import function_0 as func`
+      * 使用`as`给模块指定别名： `import module_name as mod`
+      * 导入模块中的所有函数：`from module_name import *`（由于导入了每个函数，所以可直接使用函数名调用函数，无需使用句点表示法。**如果模块中有函数名称与你的项目中使用的名称相同，可能会导致意想不到的结果：python 可能遇到多个名称相同的函数或变量，进而覆盖函数，而不是分别导入所有的函数**
+
+## 函数编写指南
+
+1.  给函数指定描述性名称，且只在其中使用小写字母和下划线
+2.  每个函数都应包含简要阐述其功能的注释，该注释紧跟在函数定义后面，并采用文档字符串格式
+3.  给形参指定默认值时，等号两边不要有空格
+4.  如果形参很多，可在函数定义中输入左括号后按回车键，并在下一行按两次 Tab 键，从而将形参列表和只缩进一层的函数体区分开来。
+5.  如果程序或模块包含多个函数，可使用两个空行将相邻的函数分开
+6.  所有的`import`语句都应放在开头，唯一例外的情形是，在文件开头使用了注释来描述整个程序
