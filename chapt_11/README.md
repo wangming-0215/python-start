@@ -77,13 +77,13 @@ my_survey.show_results()
 
 1.  各种断言方法：
 
-|          方法           |          用途          |
-| :---------------------: | :--------------------: |
-|    assertEqual(a, b)    |      核实 a == b       |
-|  assertNotEqual(a, b)   |       核实 a!=b        |
-|      assertTrue(x)      |     核实 x 为 True     |
-|     assertFalse(x)      |    核实 x 为 False     |
-|  assertIn(item, list)   |  核实 item 在 list 中  |
+| 方法                    | 用途                   |
+| :---------------------- | :--------------------- |
+| assertEqual(a, b)       | 核实 a == b            |
+| assertNotEqual(a, b)    | 核实 a!=b              |
+| assertTrue(x)           | 核实 x 为 True         |
+| assertFalse(x)          | 核实 x 为 False        |
+| assertIn(item, list)    | 核实 item 在 list 中   |
 | assertNotIn(item, list) | 核实 item 不在 list 中 |
 
 2.  方法`setUp()`：只需创建对象一次，就可以在每个测试方法中使用。
