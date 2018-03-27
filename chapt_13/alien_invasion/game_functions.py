@@ -1,6 +1,6 @@
 import sys
-import pygame
 from time import sleep
+import pygame
 
 from bullet import Bullet
 from alien import Alien
@@ -190,8 +190,6 @@ def create_fleet(ai_settings, screen, ship, aliens):
     # 外星人间距为外星人宽度
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    # available_sapce_x = ai_settings.screen_width - 2 * alien_width
-    # number_alien_x = int(available_sapce_x / (2 * alien_width))
     number_alien_x = get_number_alien_x(ai_settings, alien_width)
     number_rows = get_number_rows(
         ai_settings, ship.rect.height, alien.rect.height)
@@ -199,10 +197,6 @@ def create_fleet(ai_settings, screen, ship, aliens):
     for row_number in range(number_rows):
         for alien_number in range(number_alien_x):
             # 创建一个外星人并将其加入当前行
-            # alien = Alien(ai_settings, screen)
-            # alien.x = alien_width + (2 * alien_width * alien_number)
-            # alien.rect.x = alien.x
-            # aliens.add(alien)
             create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
 

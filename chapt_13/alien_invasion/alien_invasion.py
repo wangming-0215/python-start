@@ -26,9 +26,6 @@ def run_game():
     # 计分
     sb = ScoreBoard(ai_settings, screen, stats)
 
-    # 设置背景色
-    # bg_color = (230, 230, 230)
-
     # 创建一艘飞船
     ship = Ship(ai_settings, screen)
 
@@ -43,10 +40,6 @@ def run_game():
     # 游戏主循环
     while True:
         # 监听键盘和鼠标事件
-        # for event in pygame.event.get():
-        #     if event.type == pygame.QUIT:
-        #         sys.exit()
-
         gf.check_events(ai_settings, screen, stats, sb, ship,
                         aliens, bullets, play_button)
         if stats.game_active:
